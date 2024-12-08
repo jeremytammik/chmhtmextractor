@@ -123,36 +123,37 @@ def extract_title_and_helpid( lines ):
   helpid_prefix_len = len(helpid_prefix)
   title_prefix_len = len(title_prefix)
 
-  for line in lines:
+  with open("/tmp/title_helpid_list.txt", "w") as g:
+    for line in lines:
 
-    filename = line.strip()
+      filename = line.strip()
 
-    f = open( filename )
-    data = f.read()
-    f.close()
+      f = open( filename )
+      data = f.read()
+      f.close()
 
-    helpid = title = '<nil>'
+      helpid = title = '<nil>'
 
-    index = data.find(helpid_prefix)
-    if 0 <= index:
-      ibegin = index + helpid_prefix_len
-      iend = data[ibegin:].find('"')
-      helpid = data[ibegin: ibegin + iend]
-      helpid_count += 1
+      index = data.find(helpid_prefix)
+      if 0 <= index:
+        ibegin = index + helpid_prefix_len
+        iend = data[ibegin:].find('"')
+        helpid = data[ibegin: ibegin + iend]
+        helpid_count += 1
 
-    index = data.find(title_prefix)
-    if 0 <= index:
-      ibegin = index + title_prefix_len
-      iend = data[ibegin:].find('<')
-      title = data[ibegin: ibegin + iend]
-      title_count += 1
+      index = data.find(title_prefix)
+      if 0 <= index:
+        ibegin = index + title_prefix_len
+        iend = data[ibegin:].find('<')
+        title = data[ibegin: ibegin + iend]
+        title_count += 1
 
-    file_count += 1
+      file_count += 1
 
-    print(filename, ':', title, ':', helpid)
+      g.write(filename + ':' + title + ':' + helpid  + '\n')
 
-    #if 20 < file_count:
-    #  break
+      #if 20 < file_count:
+      #  break
 
   print (file_count, 'files processed, with', helpid_count, 'helpids and', title_count, 'titles found.')
 
@@ -273,7 +274,8 @@ def main():
   lines = f.readlines()
   f.close()
   #delete_garbage( lines )
-  remove_specified_tags(lines, tags_to_remove)
+  extract_title_and_helpid( lines )
+  #remove_specified_tags(lines, tags_to_remove)
 
 if __name__ == '__main__':
   main()

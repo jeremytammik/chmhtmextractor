@@ -1,5 +1,9 @@
 # chmhtmextractor
-CHM Help File HTML Snippet Content Extractor
+CHM Help File HTML Snippet Content Extractor.
+
+Initially implemented to process
+the [Revit API `CHM` help file](https://github.com/ADN-DevTech/revit-api-chms?tab=readme-ov-file)
+source code `HTML` snippets.
 
 ## Classification
 

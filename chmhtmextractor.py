@@ -101,7 +101,7 @@ tags_to_remove = [
   '<div id="PageFooter" class="pageFooter">',
 ]
 
-filenamelist = '/Users/jta/revit2025apidocs/html/filenames.txt'
+filenamelist = 'filenames.txt'
 
 def html_unescape(s):
   """Handle unescape of named HTML characters using htmllib module:
@@ -123,7 +123,7 @@ def extract_title_and_helpid( lines ):
   helpid_prefix_len = len(helpid_prefix)
   title_prefix_len = len(title_prefix)
 
-  with open("/tmp/title_helpid_list.txt", "w") as g:
+  with open("title_helpid_list.txt", "w") as g:
     for line in lines:
 
       filename = line.strip()
